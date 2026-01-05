@@ -259,6 +259,116 @@ button {
     margin-top: 5px;
 }
 
+/* Order Options (3 ways to order) */
+.order-options {
+    margin: 25px 0;
+}
+
+.order-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 20px;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.order-option.primary {
+    background: var(--gradient-gold);
+    color: var(--secondary);
+    box-shadow: 0 5px 25px rgba(212, 175, 55, 0.4);
+    margin-bottom: 12px;
+}
+
+.order-option.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 35px rgba(212, 175, 55, 0.5);
+}
+
+.order-options-alt {
+    display: flex;
+    gap: 10px;
+}
+
+.order-option.secondary {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--white);
+    backdrop-filter: blur(5px);
+}
+
+.order-option.secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--primary);
+}
+
+.option-icon {
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.order-option.primary .option-icon {
+    background: var(--secondary);
+    color: var(--primary);
+}
+
+.option-icon.whatsapp {
+    background: #25D366;
+    color: white;
+}
+
+.option-icon.call {
+    background: #4285F4;
+    color: white;
+}
+
+.option-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.option-title {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.option-desc {
+    font-size: 0.75rem;
+    opacity: 0.8;
+}
+
+.order-option.primary .option-desc {
+    opacity: 0.7;
+}
+
+@media (max-width: 480px) {
+    .order-options-alt {
+        flex-direction: column;
+    }
+
+    .order-option {
+        padding: 12px 15px;
+    }
+
+    .option-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .option-title {
+        font-size: 0.9rem;
+    }
+}
+
 /* Menu Search */
 .menu-search {
     position: relative;
