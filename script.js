@@ -10,10 +10,15 @@ let currentQuantity = 1;
 let customerDetails = {};
 let currentOrderId = null;
 
+// Restaurant Operating Hours (IST)
+const RESTAURANT_OPEN_HOUR = 12;  // 12:00 PM
+const RESTAURANT_CLOSE_HOUR = 22; // 10:00 PM
+
 // DOM Elements
 document.addEventListener('DOMContentLoaded', function () {
     initPreloader();
     initNavigation();
+    initRestaurantHours(); // Check if restaurant is open
     renderMenu();
     initMenuFilter();
     initMenuSearch();
@@ -22,6 +27,83 @@ document.addEventListener('DOMContentLoaded', function () {
     initFeedback();
     initScrollEffects();
 });
+
+// Check Restaurant Operating Hours
+function initRestaurantHours() {
+    checkRestaurantStatus();
+    // Check every minute
+    setInterval(checkRestaurantStatus, 60000);
+}
+
+// Global variable to track if restaurant is open
+let isRestaurantOpen = true;
+
+function checkRestaurantStatus() {
+    // Get current IST time
+    const now = new Date();
+    const istOffset = 5.5 * 60; // IST is UTC+5:30
+    const utcOffset = now.getTimezoneOffset();
+    const istTime = new Date(now.getTime() + (utcOffset + istOffset) * 60000);
+    const currentHour = istTime.getHours();
+
+    isRestaurantOpen = currentHour >= RESTAURANT_OPEN_HOUR && currentHour < RESTAURANT_CLOSE_HOUR;
+
+    const instantOrderBtn = document.querySelector('.order-option.primary');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+
+    if (isRestaurantOpen) {
+        // Restaurant is OPEN - show ordering options
+        if (instantOrderBtn) {
+            instantOrderBtn.style.display = 'flex';
+            instantOrderBtn.style.background = '';
+            instantOrderBtn.style.boxShadow = '';
+            instantOrderBtn.style.cursor = '';
+            instantOrderBtn.href = '#menu';
+            instantOrderBtn.onclick = null;
+            instantOrderBtn.innerHTML = `
+                <div class="option-icon"><i class="fas fa-bolt"></i></div>
+                <div class="option-text">
+                    <span class="option-title">Instant Order</span>
+                    <span class="option-desc">Order from Website</span>
+                </div>
+            `;
+        }
+        // Checkout button enabled (if cart has items >= 500)
+        if (checkoutBtn) {
+            checkoutBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Proceed to Checkout';
+        }
+    } else {
+        // Restaurant is CLOSED - show closed message but allow browsing menu
+        if (instantOrderBtn) {
+            instantOrderBtn.style.display = 'flex';
+            instantOrderBtn.style.background = 'linear-gradient(135deg, #6c757d 0%, #495057 100%)';
+            instantOrderBtn.style.boxShadow = '0 5px 25px rgba(0, 0, 0, 0.2)';
+            instantOrderBtn.style.cursor = 'not-allowed';
+            instantOrderBtn.href = '#menu';
+            instantOrderBtn.onclick = (e) => {
+                e.preventDefault();
+                showNotification('We are closed now. You can browse the menu and add items to cart. Checkout available 12 PM - 10 PM.', 'error');
+                // Still scroll to menu
+                document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+            };
+            instantOrderBtn.innerHTML = `
+                <div class="option-icon" style="background: #dc3545;"><i class="fas fa-clock"></i></div>
+                <div class="option-text">
+                    <span class="option-title">Currently Closed</span>
+                    <span class="option-desc">Browse Menu • Order: 12PM-10PM</span>
+                </div>
+            `;
+        }
+        // Checkout button disabled with message
+        if (checkoutBtn) {
+            checkoutBtn.disabled = true;
+            checkoutBtn.innerHTML = '<i class="fas fa-clock"></i> Order Available: 12 PM - 10 PM';
+        }
+    }
+
+    // Update cart UI to reflect checkout status
+    updateCartUI();
+}
 
 // Preloader
 function initPreloader() {
@@ -157,6 +239,9 @@ function initMenuSearch() {
     });
 }
 
+// Categories that don't need oil/spice customization
+const NON_FOOD_CATEGORIES = ['beverages', 'mocktails'];
+
 // Customize Modal
 function openCustomize(itemId) {
     currentItem = menuItems.find(item => item.id === itemId);
@@ -164,6 +249,11 @@ function openCustomize(itemId) {
 
     const modal = document.getElementById('customizeModal');
     const dishPreview = document.getElementById('dishPreview');
+    const customizeOptions = document.querySelector('.customize-options');
+    const spiceSection = customizeOptions.querySelector('h4:first-of-type');
+    const spiceOptions = document.getElementById('spiceOptions');
+    const oilSection = customizeOptions.querySelectorAll('h4')[1];
+    const oilOptions = document.getElementById('oilOptions');
 
     dishPreview.innerHTML = `
         <img src="${currentItem.image}" alt="${currentItem.name}">
@@ -175,6 +265,13 @@ function openCustomize(itemId) {
 
     document.getElementById('qtyValue').textContent = currentQuantity;
     updateItemTotal();
+
+    // Hide spice/oil options for beverages and mocktails
+    const isBeverage = NON_FOOD_CATEGORIES.includes(currentItem.category);
+    if (spiceSection) spiceSection.style.display = isBeverage ? 'none' : 'block';
+    if (spiceOptions) spiceOptions.style.display = isBeverage ? 'none' : 'flex';
+    if (oilSection) oilSection.style.display = isBeverage ? 'none' : 'block';
+    if (oilOptions) oilOptions.style.display = isBeverage ? 'none' : 'flex';
 
     document.querySelector('input[name="spice"][value="normal"]').checked = true;
     document.querySelector('input[name="oil"][value="normal"]').checked = true;
@@ -226,8 +323,9 @@ function closeCartSidebar() {
 }
 
 function addToCart() {
-    const spice = document.querySelector('input[name="spice"]:checked').value;
-    const oil = document.querySelector('input[name="oil"]:checked').value;
+    const isBeverage = NON_FOOD_CATEGORIES.includes(currentItem.category);
+    const spice = isBeverage ? 'none' : document.querySelector('input[name="spice"]:checked').value;
+    const oil = isBeverage ? 'none' : document.querySelector('input[name="oil"]:checked').value;
     const instructions = document.getElementById('specialInstructions').value;
 
     const cartItem = {
@@ -237,6 +335,7 @@ function addToCart() {
         price: currentItem.price,
         image: currentItem.image,
         quantity: currentQuantity,
+        category: currentItem.category,
         spice: spice,
         oil: oil,
         instructions: instructions
@@ -288,7 +387,24 @@ function updateCartUI() {
             </div>
         `;
     } else {
-        cartItems.innerHTML = cart.map(item => `
+        cartItems.innerHTML = cart.map(item => {
+            const isBeverage = NON_FOOD_CATEGORIES.includes(item.category);
+            // Build customization label for food items only
+            let customizationLabel = '';
+            if (!isBeverage && item.spice !== 'none') {
+                if (item.spice === 'less') customizationLabel += '<span class="pref-tag spice-less"><i class="fas fa-pepper-hot"></i> Less Spicy</span>';
+                else if (item.spice === 'normal') customizationLabel += '<span class="pref-tag spice-normal"><i class="fas fa-pepper-hot"></i> Normal Spice</span>';
+                else if (item.spice === 'extra') customizationLabel += '<span class="pref-tag spice-extra"><i class="fas fa-fire"></i> Extra Spicy</span>';
+            }
+            if (!isBeverage && item.oil !== 'none') {
+                if (item.oil === 'less') customizationLabel += '<span class="pref-tag oil-less"><i class="fas fa-tint-slash"></i> Less Oil</span>';
+                else if (item.oil === 'normal') customizationLabel += '<span class="pref-tag oil-normal"><i class="fas fa-tint"></i> Normal Oil</span>';
+            }
+            if (item.instructions) {
+                customizationLabel += `<span class="pref-tag instructions"><i class="fas fa-comment"></i> "${item.instructions.substring(0, 12)}..."</span>`;
+            }
+
+            return `
             <div class="cart-item">
                 <div class="cart-item-image">
                     <img src="${item.image}" alt="${item.name}">
@@ -296,9 +412,7 @@ function updateCartUI() {
                 <div class="cart-item-details">
                     <h4>${item.name}</h4>
                     <div class="customization">
-                        ${item.spice !== 'normal' ? `<span>${item.spice} spicy</span>` : ''}
-                        ${item.oil !== 'normal' ? `<span>${item.oil} oil</span>` : ''}
-                        ${item.instructions ? `<span>"${item.instructions.substring(0, 15)}..."</span>` : ''}
+                        ${customizationLabel}
                     </div>
                     <span class="item-price">₹${item.price * item.quantity}</span>
                 </div>
@@ -313,7 +427,7 @@ function updateCartUI() {
                     </div>
                 </div>
             </div>
-        `).join('');
+        `}).join('');
     }
 
     const subtotal = getSubtotal();
@@ -343,9 +457,17 @@ function updateCartUI() {
     if (subtotal < 500) {
         minOrderWarning.classList.remove('hidden');
         checkoutBtn.disabled = true;
+        checkoutBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Proceed to Checkout';
+    } else if (!isRestaurantOpen) {
+        // Restaurant is closed - disable checkout
+        minOrderWarning.classList.add('hidden');
+        checkoutBtn.disabled = true;
+        checkoutBtn.innerHTML = '<i class="fas fa-clock"></i> Order Available: 12 PM - 10 PM';
     } else {
+        // All good - enable checkout
         minOrderWarning.classList.add('hidden');
         checkoutBtn.disabled = false;
+        checkoutBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Proceed to Checkout';
     }
 }
 
@@ -529,8 +651,8 @@ function confirmOrder() {
 
     cart.forEach(item => {
         restaurantMessage += `• ${item.name} x${item.quantity} = ₹${item.price * item.quantity}\n`;
-        if (item.spice !== 'normal') restaurantMessage += `  └ ${item.spice} spicy\n`;
-        if (item.oil !== 'normal') restaurantMessage += `  └ ${item.oil} oil\n`;
+        if (item.spice && item.spice !== 'normal' && item.spice !== 'none') restaurantMessage += `  └ ${item.spice} spicy\n`;
+        if (item.oil && item.oil !== 'normal' && item.oil !== 'none') restaurantMessage += `  └ ${item.oil} oil\n`;
         if (item.instructions) restaurantMessage += `  └ "${item.instructions}"\n`;
     });
 
@@ -541,7 +663,11 @@ function confirmOrder() {
     restaurantMessage += `*💵 TOTAL: ₹${total}*\n\n`;
     restaurantMessage += `💳 Payment: UPI\n`;
     restaurantMessage += `📍 Delivery: Within 2 KM\n`;
-    restaurantMessage += `⏰ ETA: 30-60 mins\n`;
+    restaurantMessage += `⏰ ETA: 30-60 mins\n\n`;
+    restaurantMessage += `━━━━━━━━━━━━━━━━━\n`;
+    restaurantMessage += `📸 *PLEASE SHARE PAYMENT PROOF*\n`;
+    restaurantMessage += `Kindly reply with a screenshot of your UPI payment transaction to confirm your order. Thank you! 🙏\n`;
+    restaurantMessage += `━━━━━━━━━━━━━━━━━`;
 
     // Build confirmation message for CUSTOMER
     let customerMessage = `✅ *ORDER CONFIRMED*\n`;
@@ -586,7 +712,38 @@ function confirmOrder() {
 }
 
 function showSuccessModal() {
+    // Display the order ID
+    const displayOrderId = document.getElementById('displayOrderId');
+    if (displayOrderId && currentOrderId) {
+        displayOrderId.textContent = currentOrderId;
+    }
+
+    // Play confirmation sound
+    const confirmSound = document.getElementById('orderConfirmSound');
+    if (confirmSound) {
+        confirmSound.volume = 0.5;
+        confirmSound.play().catch(e => console.log('Audio play prevented:', e));
+    }
+
     document.getElementById('successModal').classList.add('active');
+}
+
+// Copy Order ID to clipboard
+function copyOrderId() {
+    if (currentOrderId) {
+        navigator.clipboard.writeText(currentOrderId).then(() => {
+            const copyBtn = document.querySelector('.copy-order-btn');
+            const originalHTML = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            copyBtn.classList.add('copied');
+            showNotification('Order ID copied to clipboard!');
+
+            setTimeout(() => {
+                copyBtn.innerHTML = originalHTML;
+                copyBtn.classList.remove('copied');
+            }, 2000);
+        });
+    }
 }
 
 function closeSuccessModal() {
@@ -718,6 +875,22 @@ style.textContent = `
     .no-results i { font-size: 3rem; margin-bottom: 15px; display: block; }
 `;
 document.head.appendChild(style);
+
+// FAQ Toggle Function
+function toggleFaq(button) {
+    const faqItem = button.parentElement;
+    const isActive = faqItem.classList.contains('active');
+
+    // Close all other FAQ items
+    document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.remove('active');
+    });
+
+    // Toggle current item
+    if (!isActive) {
+        faqItem.classList.add('active');
+    }
+}
 
 console.log('🍽️ Hotel Pranjal - Best Veg Restaurant in Kurduwadi');
 console.log('📍 Madha Road, Kurduwadi | 📞 +91 75179 72020');

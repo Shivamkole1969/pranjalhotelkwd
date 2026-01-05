@@ -1,6 +1,36 @@
+# Hotel Pranjal - Best Pure Veg Restaurant in Kurduwadi, Maharashtra
+# Website: https://hotelpranjal.in
+# Phone: +91-8182805805
+
 User-agent: *
 Allow: /
+Allow: /MENU CARD.pdf
+Allow: /cafe menu card.pdf
+
+# Sitemap location
 Sitemap: https://hotelpranjal.in/sitemap.xml
 
-# Hotel Pranjal - Best Veg Restaurant in Kurduwadi
-# Website: https://hotelpranjal.in
+# Crawl delay for polite crawling
+Crawl-delay: 1
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing specific
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Google Images
+User-agent: Googlebot-Image
+Allow: /
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.webp$
+
+# Disallow unnecessary paths
+Disallow: /*.git
+Disallow: /node_modules

@@ -1,33 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage -->
   <url>
     <loc>https://hotelpranjal.in/</loc>
-    <lastmod>2026-01-05</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-01-06</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://hotelpranjal.in/website-bg-optimized.jpg</image:loc>
+      <image:title>Hotel Pranjal Kurduwadi - Best Pure Veg Restaurant</image:title>
+      <image:caption>Welcome to Hotel Pranjal - Best Vegetarian Restaurant in Kurduwadi, Maharashtra</image:caption>
+    </image:image>
   </url>
+  
+  <!-- Menu Section -->
   <url>
     <loc>https://hotelpranjal.in/#menu</loc>
-    <lastmod>2026-01-05</lastmod>
+    <lastmod>2026-01-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+  
+  <!-- About Section -->
   <url>
     <loc>https://hotelpranjal.in/#about</loc>
-    <lastmod>2026-01-05</lastmod>
+    <lastmod>2026-01-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  
+  <!-- Party Hall Section -->
   <url>
     <loc>https://hotelpranjal.in/#partyhall</loc>
-    <lastmod>2026-01-05</lastmod>
+    <lastmod>2026-01-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://hotelpranjal.in/hall1.jpeg</image:loc>
+      <image:title>Hotel Pranjal Party Hall</image:title>
+      <image:caption>AC Party Hall for 50-200 guests - Birthdays, Weddings, Corporate Events</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://hotelpranjal.in/hall3.jpeg</image:loc>
+      <image:title>Hotel Pranjal Banquet Hall</image:title>
+      <image:caption>Spacious AC Banquet Hall with Catering Services</image:caption>
+    </image:image>
   </url>
+  
+  <!-- Feedback Section -->
+  <url>
+    <loc>https://hotelpranjal.in/#feedback</loc>
+    <lastmod>2026-01-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Contact Section -->
   <url>
     <loc>https://hotelpranjal.in/#contact</loc>
-    <lastmod>2026-01-05</lastmod>
+    <lastmod>2026-01-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  
+  <!-- PDF Menus -->
+  <url>
+    <loc>https://hotelpranjal.in/MENU%20CARD.pdf</loc>
+    <lastmod>2026-01-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://hotelpranjal.in/cafe%20menu%20card.pdf</loc>
+    <lastmod>2026-01-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
 </urlset>
