@@ -1344,6 +1344,18 @@ button {
     color: var(--primary);
 }
 
+.contact-card.full-width {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #833AB4, #FD1D1D, #F77737);
+}
+
+.contact-card.full-width i,
+.contact-card.full-width h4,
+.contact-card.full-width p,
+.contact-card.full-width a {
+    color: white;
+}
+
 .map-container {
     border-radius: var(--radius-md);
     overflow: hidden;
