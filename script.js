@@ -64,6 +64,9 @@ function initNavigation() {
     });
 }
 
+// Track if view more is expanded
+let menuExpanded = false;
+
 // Render Menu
 function renderMenu(category = 'all', searchTerm = '') {
     const menuGrid = document.getElementById('menuGrid');
@@ -81,11 +84,16 @@ function renderMenu(category = 'all', searchTerm = '') {
         return;
     }
 
-    menuGrid.innerHTML = filteredItems.map(item => `
+    // Show only 10 items for "all" category initially, or all for specific categories
+    const showLimit = (category === 'all' && !menuExpanded && !searchTerm) ? 10 : filteredItems.length;
+    const itemsToShow = filteredItems.slice(0, showLimit);
+    const hasMore = filteredItems.length > showLimit;
+
+    menuGrid.innerHTML = itemsToShow.map(item => `
         <div class="menu-card" data-category="${item.category}" data-id="${item.id}">
             <div class="menu-card-image">
                 <img src="${item.image}" alt="${item.name}" loading="lazy">
-                ${item.badge ? `<span class="menu-badge ${item.badge}">${item.badge === 'bestseller' ? 'Bestseller' : 'Popular'}</span>` : ''}
+                ${item.badge ? `<span class="menu-badge ${item.badge}">${item.badge === 'bestseller' ? 'Bestseller' : item.badge === 'premium' ? 'Premium' : 'Popular'}</span>` : ''}
             </div>
             <div class="menu-card-content">
                 <div class="menu-card-header">
@@ -102,6 +110,23 @@ function renderMenu(category = 'all', searchTerm = '') {
             </div>
         </div>
     `).join('');
+
+    // Add View More button if there are more items
+    if (hasMore) {
+        menuGrid.innerHTML += `
+            <div class="view-more-container">
+                <button class="view-more-btn" onclick="showAllMenu()">
+                    <i class="fas fa-chevron-down"></i> View All ${filteredItems.length} Dishes
+                </button>
+            </div>
+        `;
+    }
+}
+
+// Show all menu items
+function showAllMenu() {
+    menuExpanded = true;
+    renderMenu('all');
 }
 
 // Menu Filter

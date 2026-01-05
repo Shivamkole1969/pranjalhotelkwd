@@ -2503,3 +2503,113 @@ button {
         grid-template-columns: repeat(4, 1fr);
     }
 }
+
+/* =============================================
+   ANIMATED HOTEL PRANJAL TITLE
+   ============================================= */
+.animated-title {
+    background: linear-gradient(90deg,
+            var(--primary) 0%,
+            #FFD700 25%,
+            var(--primary) 50%,
+            #FFD700 75%,
+            var(--primary) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: titleShine 3s linear infinite, titleFloat 2s ease-in-out infinite;
+}
+
+@keyframes titleShine {
+    0% {
+        background-position: 0% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
+}
+
+@keyframes titleFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Food Quote */
+.food-quote {
+    font-family: var(--font-script);
+    font-size: 1.3rem;
+    color: var(--primary-light);
+    margin: 10px 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* View More Button */
+.view-more-container {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 30px 0;
+}
+
+.view-more-btn {
+    background: var(--gradient-gold);
+    color: var(--secondary);
+    border: none;
+    padding: 15px 40px;
+    border-radius: var(--radius-full);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+    transition: all 0.3s ease;
+}
+
+.view-more-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+}
+
+.view-more-btn i {
+    animation: bounceDown 1.5s infinite;
+}
+
+@keyframes bounceDown {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(5px);
+    }
+}
+
+/* Premium Badge */
+.menu-badge.premium {
+    background: linear-gradient(135deg, #9B59B6, #8E44AD);
+}
