@@ -2098,3 +2098,408 @@ button {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
+/* =============================================
+   PARTY HALL SECTION
+   ============================================= */
+.party-hall-section {
+    padding: 60px 0;
+    background: linear-gradient(135deg, #FDF8F3 0%, #FFF9F0 100%);
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--gray-500);
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.hall-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.hall-feature-item {
+    background: white;
+    padding: 20px;
+    border-radius: var(--radius-md);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hall-feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.hall-feature-item i {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.hall-feature-item h4 {
+    color: var(--secondary);
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.hall-feature-item p {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+}
+
+.events-we-host {
+    background: var(--secondary);
+    padding: 25px;
+    border-radius: var(--radius-md);
+    margin: 30px 0;
+    text-align: center;
+}
+
+.events-we-host h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.events-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.event-tag {
+    background: rgba(212, 175, 55, 0.2);
+    color: var(--primary);
+    padding: 8px 15px;
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+.event-tag:hover {
+    background: var(--primary);
+    color: var(--secondary);
+    transform: scale(1.05);
+}
+
+.gallery-title {
+    text-align: center;
+    color: var(--secondary);
+    font-size: 1.3rem;
+    margin: 30px 0 15px;
+}
+
+.gallery-title i {
+    color: var(--primary);
+    margin-right: 8px;
+}
+
+.hall-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.gallery-item {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.03);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.catering-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.catering-card {
+    background: white;
+    padding: 20px;
+    border-radius: var(--radius-md);
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.catering-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-3px);
+}
+
+.catering-card i {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.catering-card h4 {
+    color: var(--secondary);
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+}
+
+.catering-card p {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+}
+
+.hall-booking-cta {
+    background: var(--gradient-gold);
+    padding: 30px 20px;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(212, 175, 55, 0.3);
+}
+
+.hall-booking-cta h3 {
+    color: var(--secondary);
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.hall-booking-cta>p {
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+
+.booking-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.booking-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 25px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    flex-direction: column;
+}
+
+.booking-btn i {
+    font-size: 1.5rem;
+}
+
+.booking-btn span {
+    font-size: 0.85rem;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+.booking-btn.whatsapp {
+    background: #25D366;
+    color: white;
+}
+
+.booking-btn.whatsapp:hover {
+    background: #1DA851;
+    transform: scale(1.03);
+}
+
+.booking-btn.call {
+    background: var(--secondary);
+    color: white;
+}
+
+.booking-btn.call:hover {
+    background: #1A0F0A;
+    transform: scale(1.03);
+}
+
+/* Google Review Button */
+.google-review-section {
+    margin-top: 30px;
+    text-align: center;
+    padding: 25px;
+    background: linear-gradient(135deg, #FFF 0%, #F8F6F3 100%);
+    border-radius: var(--radius-md);
+    border: 2px dashed var(--primary);
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gray-300);
+}
+
+.divider span {
+    padding: 0 15px;
+    color: var(--gray-400);
+    font-weight: 500;
+}
+
+.google-review-section h4 {
+    color: var(--secondary);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.google-review-section p {
+    color: var(--gray-500);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.google-review-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #4285F4, #34A853, #FBBC05, #EA4335);
+    background-size: 300% 300%;
+    animation: googleGradient 3s ease infinite;
+    color: white;
+    padding: 14px 30px;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.google-review-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(66, 133, 244, 0.4);
+}
+
+@keyframes googleGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Instagram Button */
+.instagram-btn {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.instagram-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 30px rgba(131, 58, 180, 0.3);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.8s ease-out;
+}
+
+.animate-slideUp {
+    animation: slideUp 0.8s ease-out;
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Responsive Party Hall */
+@media (min-width: 480px) {
+    .booking-buttons {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .booking-btn {
+        flex-direction: row;
+    }
+
+    .gallery-item img {
+        height: 180px;
+    }
+}
+
+@media (min-width: 768px) {
+    .hall-features {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .hall-gallery {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .gallery-item img {
+        height: 200px;
+    }
+
+    .catering-info {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
