@@ -827,6 +827,17 @@ button {
     font-size: 0.9rem;
 }
 
+.delivery-info .info-item.highlight {
+    background: var(--success);
+    color: white;
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+}
+
+.delivery-info .info-item.highlight i {
+    color: white;
+}
+
 /* Offers Section */
 .offers-section {
     padding: 20px 0;
