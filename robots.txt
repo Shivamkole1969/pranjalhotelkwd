@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Sitemap: https://hotelpranjal.in/sitemap.xml
+
+# Hotel Pranjal - Best Veg Restaurant in Kurduwadi
+# Website: https://hotelpranjal.in
