@@ -104,6 +104,258 @@ button {
     visibility: hidden;
 }
 
+/* Success Modal */
+.success-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 10001;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-modal.active {
+    display: flex;
+}
+
+.success-content {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 40px 30px;
+    text-align: center;
+    max-width: 400px;
+    margin: 20px;
+    animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--success);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.success-icon i {
+    font-size: 2.5rem;
+    color: var(--white);
+}
+
+.success-content h2 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--secondary);
+    margin-bottom: 10px;
+}
+
+.success-content p {
+    color: var(--gray-500);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.order-id {
+    background: var(--gray-100);
+    padding: 10px 20px;
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    color: var(--gray-600);
+    margin-bottom: 20px;
+}
+
+/* Trust Strip */
+.trust-strip {
+    background: var(--secondary);
+    padding: 12px 0;
+}
+
+.trust-badges {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.trust-item i {
+    font-size: 0.9rem;
+}
+
+/* Hero Tagline */
+.hero-tagline {
+    font-size: 1rem;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+
+/* Trust Box (GSTIN) */
+.trust-box {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+    border: 2px solid var(--primary);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    margin: 25px 0;
+    text-align: center;
+}
+
+.trust-box h4 {
+    color: var(--secondary);
+    font-size: 1rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.trust-box h4 i {
+    color: var(--primary);
+}
+
+.trust-box p {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+    margin-bottom: 5px;
+}
+
+.trust-box p strong {
+    color: var(--secondary);
+}
+
+/* GSTIN in Footer */
+.gstin {
+    color: var(--gray-400);
+    font-size: 0.75rem;
+    margin-top: 5px;
+}
+
+/* Menu Search */
+.menu-search {
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto 20px;
+}
+
+.menu-search input {
+    width: 100%;
+    padding: 12px 45px 12px 15px;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius-full);
+    font-size: 0.9rem;
+    transition: 0.3s ease;
+}
+
+.menu-search input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+.menu-search i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray-400);
+}
+
+/* Add More Items Button */
+.add-more-items {
+    padding: 10px 15px;
+    border-top: 1px dashed var(--gray-200);
+}
+
+.add-more-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px;
+    background: var(--gray-100);
+    border-radius: var(--radius-full);
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: 0.3s ease;
+}
+
+.add-more-btn:hover {
+    background: rgba(212, 175, 55, 0.15);
+}
+
+/* Modal Note */
+.modal-note {
+    text-align: center;
+    color: var(--gray-500);
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+/* Form Labels */
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--gray-600);
+    margin-bottom: 5px;
+}
+
+/* Payment Note */
+.payment-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: #fff3cd;
+    padding: 12px;
+    border-radius: var(--radius-sm);
+    margin-top: 15px;
+}
+
+.payment-note i {
+    color: #856404;
+    font-size: 1rem;
+    margin-top: 2px;
+}
+
+.payment-note p {
+    font-size: 0.8rem;
+    color: #856404;
+    margin: 0;
+}
+
 .loader {
     position: relative;
     width: 100px;

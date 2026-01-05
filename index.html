@@ -5,18 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description"
-        content="Hotel Pranjal - Pure Veg AC Restaurant in Kurduwadi. Order online for home delivery. Rated 4.8/5 by 1500+ happy customers. 7+ years of excellence.">
+        content="Hotel Pranjal - Best Pure Veg AC Restaurant in Kurduwadi. Trusted by thousands of customers. Order online for home delivery. Rated 4.8/5 by 1500+ happy customers.">
     <meta name="keywords"
-        content="Hotel Pranjal, Kurduwadi, Pure Veg Restaurant, Indian Restaurant, Vegetarian Food, AC Restaurant, Maharashtra, Online Order, Home Delivery">
+        content="Hotel Pranjal, Kurduwadi, Best Veg Restaurant, Pure Veg Restaurant, Indian Restaurant, Vegetarian Food, AC Restaurant, Maharashtra, Online Order, Home Delivery">
     <meta name="author" content="Hotel Pranjal Kurduwadi">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#D4AF37">
-    <meta property="og:title" content="Hotel Pranjal - Pure Veg AC Restaurant | Order Online">
+    <meta property="og:title" content="Hotel Pranjal - Best Pure Veg Restaurant Kurduwadi | Order Online">
     <meta property="og:description"
-        content="Order delicious pure vegetarian food online. Min ₹500 for delivery. Rated 4.8/5 by 1500+ customers.">
+        content="Best Veg Hotel in Kurduwadi. Trusted by thousands. Order delicious pure vegetarian food online. Min ₹500 for delivery.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hotelpranjal.in">
-    <title>Hotel Pranjal | Pure Veg Restaurant - Order Online | Kurduwadi</title>
+    <title>Hotel Pranjal | Best Pure Veg Restaurant in Kurduwadi | Order Online</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -32,6 +32,17 @@
         <div class="loader">
             <div class="loader-inner"></div>
             <span class="loader-text">Hotel Pranjal</span>
+        </div>
+    </div>
+
+    <!-- Order Success Modal -->
+    <div class="success-modal" id="successModal">
+        <div class="success-content">
+            <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+            <h2>Thank You!</h2>
+            <p>Thanks for placing the order, we'll deliver your order shortly. Thanks for the patience!</p>
+            <div class="order-id">Order sent via WhatsApp</div>
+            <button class="btn btn-primary" onclick="closeSuccessModal()">Continue Browsing</button>
         </div>
     </div>
 
@@ -70,7 +81,7 @@
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="#menu" class="nav-link">Order Online</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#about" class="nav-link">About Us</a></li>
                 <li><a href="#feedback" class="nav-link">Feedback</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
                 <li>
@@ -83,7 +94,7 @@
         </div>
     </nav>
 
-    <!-- Hero Section with Restaurant Background -->
+    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-bg" style="background-image: url('website background.JPG.jpg');"></div>
         <div class="hero-overlay"></div>
@@ -94,6 +105,7 @@
                 <span class="main-title">Hotel Pranjal</span>
                 <span class="sub-title">Pure Veg AC Restaurant</span>
             </h1>
+            <p class="hero-tagline">🏆 Best Veg Hotel in Kurduwadi • Trusted by Thousands of Customers</p>
             <p class="hero-description">Order delicious vegetarian food online. Home delivery within 2 km in 30-60
                 minutes!</p>
             <div class="hero-cta">
@@ -119,6 +131,18 @@
                     <span class="stat-value">7+</span>
                     <span class="stat-label">Years</span>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Badges -->
+    <section class="trust-strip">
+        <div class="container">
+            <div class="trust-badges">
+                <div class="trust-item"><i class="fas fa-shield-alt"></i><span>FSSAI Certified</span></div>
+                <div class="trust-item"><i class="fas fa-file-invoice"></i><span>GST Registered</span></div>
+                <div class="trust-item"><i class="fas fa-award"></i><span>100% Hygenic</span></div>
+                <div class="trust-item"><i class="fas fa-heart"></i><span>Trusted Since 2017</span></div>
             </div>
         </div>
     </section>
@@ -176,39 +200,65 @@
                 </a>
             </div>
 
+            <!-- Menu Search -->
+            <div class="menu-search">
+                <input type="text" id="menuSearch" placeholder="Search dishes...">
+                <i class="fas fa-search"></i>
+            </div>
+
             <!-- Menu Categories -->
             <div class="menu-categories">
                 <button class="menu-tab active" data-category="all">All</button>
                 <button class="menu-tab" data-category="starters">Starters</button>
+                <button class="menu-tab" data-category="soup">Soup</button>
                 <button class="menu-tab" data-category="mains">Main Course</button>
                 <button class="menu-tab" data-category="thali">Thali</button>
+                <button class="menu-tab" data-category="rice">Rice & Biryani</button>
+                <button class="menu-tab" data-category="roti">Roti & Naan</button>
                 <button class="menu-tab" data-category="chinese">Chinese</button>
+                <button class="menu-tab" data-category="pizza">Pizza & Pasta</button>
+                <button class="menu-tab" data-category="dosa">South Indian</button>
                 <button class="menu-tab" data-category="beverages">Beverages</button>
+                <button class="menu-tab" data-category="desserts">Desserts</button>
+                <button class="menu-tab" data-category="icecream">Ice Cream</button>
             </div>
 
             <!-- Menu Grid -->
             <div class="menu-grid" id="menuGrid">
-                <!-- Menu items will be loaded dynamically -->
+                <!-- Menu items loaded dynamically -->
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- About Us Section -->
     <section class="about-section" id="about">
         <div class="container">
+            <div class="section-header">
+                <span class="section-badge">About Us</span>
+                <h2 class="section-title">Our <span class="highlight">Story</span></h2>
+            </div>
             <div class="about-content-centered">
-                <span class="section-badge">Our Story</span>
-                <h2 class="section-title">A Legacy of <span class="highlight">Pure Vegetarian</span> Excellence</h2>
-                <p class="about-text">Welcome to <strong>Hotel Pranjal</strong>, Kurduwadi's most beloved pure
-                    vegetarian restaurant. Located in Bagal Nagar on Madha Road, we have been serving authentic Indian
-                    cuisine with love and passion for over <strong>7 years</strong>.</p>
+                <p class="about-text">Welcome to <strong>Hotel Pranjal</strong>, the <strong>Best Pure Vegetarian
+                        Restaurant in Kurduwadi</strong>. Located in Bagal Nagar on Madha Road, we have been serving
+                    authentic Indian cuisine with love and passion for over <strong>7 years</strong>.</p>
                 <p class="about-text">Our commitment to quality, hygiene, and taste has earned us a remarkable
-                    <strong>4.8-star rating</strong> from over 1500+ happy customers.</p>
+                    <strong>4.8-star rating</strong> from over <strong>1500+ happy customers</strong>. We take pride in
+                    being a <strong>trusted name</strong> in Kurduwadi for delicious vegetarian food.</p>
+
+                <div class="trust-box">
+                    <h4><i class="fas fa-building"></i> Registered Business</h4>
+                    <p><strong>GSTIN:</strong> 27KXQPS3637L1ZC</p>
+                    <p>Hotel Pranjal is a registered and trusted establishment committed to quality and customer
+                        satisfaction.</p>
+                </div>
+
                 <div class="features-grid">
                     <div class="feature-item"><i class="fas fa-snowflake"></i><span>AC Dining</span></div>
                     <div class="feature-item"><i class="fas fa-wifi"></i><span>Free Wi-Fi</span></div>
                     <div class="feature-item"><i class="fas fa-shopping-bag"></i><span>Takeaway</span></div>
                     <div class="feature-item"><i class="fas fa-motorcycle"></i><span>Home Delivery</span></div>
+                    <div class="feature-item"><i class="fas fa-leaf"></i><span>100% Veg</span></div>
+                    <div class="feature-item"><i class="fas fa-hand-sparkles"></i><span>Hygiene First</span></div>
                 </div>
             </div>
         </div>
@@ -223,10 +273,10 @@
             </div>
             <form class="feedback-form" id="feedbackForm">
                 <div class="form-group">
-                    <input type="text" id="feedbackName" placeholder="Your Name" required>
+                    <input type="text" id="feedbackName" placeholder="Your Name *" required>
                 </div>
                 <div class="form-group">
-                    <input type="tel" id="feedbackPhone" placeholder="Phone Number" required>
+                    <input type="tel" id="feedbackPhone" placeholder="Phone Number *" required>
                 </div>
                 <div class="form-group rating-group">
                     <label>Rate Us:</label>
@@ -260,7 +310,7 @@
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                             class="fas fa-star"></i><i class="fas fa-star"></i>
                     </div>
-                    <span class="rating-text">Based on 1500+ Reviews</span>
+                    <span class="rating-text">Trusted by 1500+ Happy Customers</span>
                 </div>
             </div>
             <div class="reviews-grid">
@@ -287,6 +337,17 @@
                     </div>
                     <p class="review-text">"Love the customization options. I can order less spicy food for my kids!"
                     </p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-avatar"><span>SM</span></div>
+                        <div class="reviewer-info">
+                            <h4>Suresh Mane</h4>
+                            <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        </div>
+                    </div>
+                    <p class="review-text">"Trusted restaurant with great taste. Been ordering for years!"</p>
                 </div>
             </div>
         </div>
@@ -351,6 +412,7 @@
             <div class="footer-brand">
                 <h3>Hotel Pranjal</h3>
                 <p>Pure Veg AC Restaurant • Since 2017</p>
+                <p class="gstin">GSTIN: 27KXQPS3637L1ZC</p>
             </div>
             <div class="footer-links">
                 <a href="https://wa.me/917517972020" target="_blank"><i class="fab fa-whatsapp"></i></a>
@@ -370,6 +432,11 @@
         </div>
         <div class="cart-items" id="cartItems">
             <!-- Cart items will be added here -->
+        </div>
+        <div class="add-more-items">
+            <a href="#menu" class="add-more-btn" onclick="closeCartSidebar()">
+                <i class="fas fa-plus-circle"></i> Add More Dishes
+            </a>
         </div>
         <div class="cart-summary" id="cartSummary">
             <div class="summary-row"><span>Subtotal</span><span id="subtotal">₹0</span></div>
@@ -429,23 +496,55 @@
         </div>
     </div>
 
+    <!-- Customer Details Modal (Before Payment) -->
+    <div class="modal-overlay" id="customerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user"></i> Your Details</h3>
+                <button class="modal-close" id="closeCustomer"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-note">Please provide your details to proceed with the order</p>
+                <form id="customerForm">
+                    <div class="form-group">
+                        <label>Full Name *</label>
+                        <input type="text" id="customerName" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number *</label>
+                        <input type="tel" id="customerPhone" placeholder="10-digit mobile number" pattern="[0-9]{10}"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email (Optional)</label>
+                        <input type="email" id="customerEmail" placeholder="For order updates">
+                    </div>
+                    <div class="form-group">
+                        <label>Delivery Address *</label>
+                        <textarea id="customerAddress" placeholder="Full address (within 2 KM of restaurant)"
+                            required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary btn-block" id="proceedToPayment">
+                    <i class="fas fa-arrow-right"></i> Proceed to Payment
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Payment Modal -->
     <div class="modal-overlay" id="paymentModal">
         <div class="modal-content payment-modal">
             <div class="modal-header">
-                <h3><i class="fas fa-credit-card"></i> Payment</h3>
+                <h3><i class="fas fa-credit-card"></i> Complete Payment</h3>
                 <button class="modal-close" id="closePayment"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body">
-                <div class="delivery-form">
-                    <h4>Delivery Details</h4>
-                    <input type="text" id="customerName" placeholder="Your Name" required>
-                    <input type="tel" id="customerPhone" placeholder="Phone Number" required>
-                    <textarea id="customerAddress" placeholder="Delivery Address (within 2 KM)" required></textarea>
-                </div>
                 <div class="payment-info">
                     <h4>Pay via UPI</h4>
-                    <p class="upi-note">Scan QR code or pay to UPI ID</p>
+                    <p class="upi-note">Scan QR code or pay using UPI ID below</p>
                     <div class="qr-code">
                         <img src="upi QR code.jpeg" alt="UPI QR Code">
                     </div>
@@ -463,7 +562,12 @@
                 <div class="order-summary-final">
                     <h4>Order Summary</h4>
                     <div id="orderSummaryItems"></div>
-                    <div class="summary-row total"><span>Total to Pay</span><span id="finalTotal">₹0</span></div>
+                    <div class="summary-row total"><span>Amount to Pay</span><span id="finalTotal">₹0</span></div>
+                </div>
+                <div class="payment-note">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <p>After payment, click "Confirm Order" to send order details via WhatsApp. Both you and we will
+                        receive confirmation.</p>
                 </div>
             </div>
             <div class="modal-footer">
