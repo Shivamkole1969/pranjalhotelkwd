@@ -1,86 +1,81 @@
 /* =============================================
-   HOTEL PRANJAL - JavaScript Functionality
+   HOTEL PRANJAL - Restaurant Ordering System
    ============================================= */
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize all components
+// Menu Data
+const menuItems = [
+    { id: 1, name: "Paneer Tikka", price: 180, category: "starters", image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400", description: "Marinated cottage cheese grilled to perfection", badge: "bestseller" },
+    { id: 2, name: "Veg Manchurian", price: 150, category: "starters", image: "https://images.unsplash.com/photo-1645177628172-a94c1f96e6db?w=400", description: "Crispy vegetable balls in tangy sauce", badge: "popular" },
+    { id: 3, name: "Spring Rolls", price: 120, category: "starters", image: "https://images.unsplash.com/photo-1548507200-e587de219312?w=400", description: "Crispy rolls stuffed with vegetables" },
+    { id: 4, name: "Paneer Butter Masala", price: 200, category: "mains", image: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=400", description: "Creamy tomato gravy with soft paneer", badge: "bestseller" },
+    { id: 5, name: "Dal Makhani", price: 160, category: "mains", image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400", description: "Slow-cooked black lentils in rich gravy" },
+    { id: 6, name: "Veg Biryani", price: 180, category: "mains", image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400", description: "Fragrant rice with spiced vegetables", badge: "bestseller" },
+    { id: 7, name: "Kadai Paneer", price: 190, category: "mains", image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400", description: "Paneer in spicy bell pepper gravy" },
+    { id: 8, name: "Shahi Paneer", price: 210, category: "mains", image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400", description: "Royal paneer in creamy cashew gravy" },
+    { id: 9, name: "Special Thali", price: 250, category: "thali", image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400", description: "Complete meal with 4 dishes, rice, roti, sweet", badge: "bestseller" },
+    { id: 10, name: "Mini Thali", price: 150, category: "thali", image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400", description: "3 dishes with rice and 2 rotis" },
+    { id: 11, name: "Veg Fried Rice", price: 140, category: "chinese", image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400", description: "Wok-tossed rice with vegetables" },
+    { id: 12, name: "Hakka Noodles", price: 130, category: "chinese", image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400", description: "Stir-fried noodles with vegetables", badge: "popular" },
+    { id: 13, name: "Chilli Paneer", price: 170, category: "chinese", image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400", description: "Spicy Indo-Chinese paneer dish" },
+    { id: 14, name: "Cold Coffee", price: 80, category: "beverages", image: "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=400", description: "Creamy chilled coffee with ice cream", badge: "bestseller" },
+    { id: 15, name: "Fresh Lime Soda", price: 50, category: "beverages", image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400", description: "Refreshing lime with soda" },
+    { id: 16, name: "Mango Lassi", price: 70, category: "beverages", image: "https://images.unsplash.com/photo-1626200419199-bc954a39a111?w=400", description: "Sweet mango yogurt drink" },
+    { id: 17, name: "Masala Chai", price: 30, category: "beverages", image: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=400", description: "Traditional Indian spiced tea" },
+];
+
+// Cart State
+let cart = [];
+let currentItem = null;
+let currentQuantity = 1;
+
+// DOM Elements
+document.addEventListener('DOMContentLoaded', function () {
     initPreloader();
-    initNavbar();
-    initSmoothScroll();
-    initScrollAnimations();
+    initNavigation();
+    renderMenu();
     initMenuFilter();
-    initReviewsSlider();
-    initBackToTop();
-    initParticles();
+    initCart();
+    initModals();
+    initFeedback();
+    initScrollEffects();
 });
 
-/* =============================================
-   PRELOADER
-   ============================================= */
+// Preloader
 function initPreloader() {
     const preloader = document.getElementById('preloader');
-    
-    window.addEventListener('load', function() {
+    window.addEventListener('load', () => {
         setTimeout(() => {
             preloader.classList.add('hidden');
-            document.body.style.overflow = 'visible';
-        }, 1000);
+        }, 800);
     });
 }
 
-/* =============================================
-   NAVBAR
-   ============================================= */
-function initNavbar() {
-    const navbar = document.getElementById('navbar');
-    const navToggle = document.getElementById('navToggle');
-    const navMenu = document.getElementById('navMenu');
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    // Scroll effect
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 100) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
-    
-    // Mobile menu toggle
-    navToggle.addEventListener('click', function() {
-        navToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-    });
-    
-    // Close menu on link click
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            navToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-            document.body.style.overflow = '';
-            
-            // Update active state
-            navLinks.forEach(l => l.classList.remove('active'));
+// Navigation
+function initNavigation() {
+    const mobileNavItems = document.querySelectorAll('.mobile-bottom-nav .nav-item[data-section]');
+    const sections = document.querySelectorAll('section[id]');
+
+    // Mobile nav click
+    mobileNavItems.forEach(item => {
+        item.addEventListener('click', function (e) {
+            mobileNavItems.forEach(i => i.classList.remove('active'));
             this.classList.add('active');
         });
     });
-    
-    // Update active link on scroll
-    window.addEventListener('scroll', function() {
-        const sections = document.querySelectorAll('section[id]');
-        const scrollPos = window.scrollY + 200;
-        
+
+    // Scroll spy
+    window.addEventListener('scroll', () => {
+        const scrollPos = window.scrollY + 150;
         sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-            
-            if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('active');
+            const top = section.offsetTop;
+            const height = section.offsetHeight;
+            const id = section.getAttribute('id');
+
+            if (scrollPos >= top && scrollPos < top + height) {
+                mobileNavItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.dataset.section === id) {
+                        item.classList.add('active');
                     }
                 });
             }
@@ -88,180 +83,442 @@ function initNavbar() {
     });
 }
 
-/* =============================================
-   SMOOTH SCROLL
-   ============================================= */
-function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const headerOffset = 80;
-                const elementPosition = target.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
+// Render Menu
+function renderMenu(category = 'all') {
+    const menuGrid = document.getElementById('menuGrid');
+    const filteredItems = category === 'all' ? menuItems : menuItems.filter(item => item.category === category);
+
+    menuGrid.innerHTML = filteredItems.map(item => `
+        <div class="menu-card" data-category="${item.category}" data-id="${item.id}">
+            <div class="menu-card-image">
+                <img src="${item.image}" alt="${item.name}" loading="lazy">
+                ${item.badge ? `<span class="menu-badge ${item.badge}">${item.badge === 'bestseller' ? 'Bestseller' : 'Popular'}</span>` : ''}
+            </div>
+            <div class="menu-card-content">
+                <div class="menu-card-header">
+                    <h3>${item.name}</h3>
+                    <span class="price">₹${item.price}</span>
+                </div>
+                <p>${item.description}</p>
+                <div class="menu-card-footer">
+                    <span class="veg-indicator"><i class="fas fa-circle"></i> Pure Veg</span>
+                    <button class="add-btn" onclick="openCustomize(${item.id})">
+                        <i class="fas fa-plus"></i> ADD
+                    </button>
+                </div>
+            </div>
+        </div>
+    `).join('');
 }
 
-/* =============================================
-   SCROLL ANIMATIONS
-   ============================================= */
-function initScrollAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-    
-    // Add animation classes to elements
-    const animateElements = document.querySelectorAll(
-        '.about-feature, .menu-card, .why-us-card, .gallery-item, .review-card, .contact-item, .footer-about, .footer-links, .footer-contact'
-    );
-    
-    animateElements.forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
-        observer.observe(el);
-    });
-    
-    // Add the animate-in styles
-    const style = document.createElement('style');
-    style.textContent = `
-        .animate-in {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-    `;
-    document.head.appendChild(style);
-}
-
-/* =============================================
-   MENU FILTER
-   ============================================= */
+// Menu Filter
 function initMenuFilter() {
     const menuTabs = document.querySelectorAll('.menu-tab');
-    const menuCards = document.querySelectorAll('.menu-card');
-    
+
     menuTabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-            const category = this.dataset.category;
-            
-            // Update active tab
+        tab.addEventListener('click', function () {
             menuTabs.forEach(t => t.classList.remove('active'));
             this.classList.add('active');
-            
-            // Filter cards with animation
-            menuCards.forEach((card, index) => {
-                const cardCategory = card.dataset.category;
-                
-                if (category === 'all' || cardCategory === category) {
-                    card.style.display = 'block';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, index * 50);
-                } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(20px)';
-                    setTimeout(() => {
-                        card.style.display = 'none';
-                    }, 300);
-                }
+            renderMenu(this.dataset.category);
+        });
+    });
+}
+
+// Customize Modal
+function openCustomize(itemId) {
+    currentItem = menuItems.find(item => item.id === itemId);
+    currentQuantity = 1;
+
+    const modal = document.getElementById('customizeModal');
+    const dishPreview = document.getElementById('dishPreview');
+
+    dishPreview.innerHTML = `
+        <img src="${currentItem.image}" alt="${currentItem.name}">
+        <div>
+            <h4>${currentItem.name}</h4>
+            <span class="price">₹${currentItem.price}</span>
+        </div>
+    `;
+
+    document.getElementById('qtyValue').textContent = currentQuantity;
+    updateItemTotal();
+
+    // Reset options
+    document.querySelector('input[name="spice"][value="normal"]').checked = true;
+    document.querySelector('input[name="oil"][value="normal"]').checked = true;
+    document.getElementById('specialInstructions').value = '';
+
+    modal.classList.add('active');
+}
+
+function updateItemTotal() {
+    document.getElementById('itemTotal').textContent = `₹${currentItem.price * currentQuantity}`;
+}
+
+// Cart Functions
+function initCart() {
+    const cartNavBtn = document.getElementById('cartNavBtn');
+    const desktopCartBtn = document.getElementById('desktopCartBtn');
+    const closeCart = document.getElementById('closeCart');
+    const cartOverlay = document.getElementById('cartOverlay');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+
+    [cartNavBtn, desktopCartBtn].forEach(btn => {
+        if (btn) btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openCart();
+        });
+    });
+
+    closeCart.addEventListener('click', closeCartSidebar);
+    cartOverlay.addEventListener('click', closeCartSidebar);
+
+    checkoutBtn.addEventListener('click', () => {
+        if (getSubtotal() >= 500) {
+            closeCartSidebar();
+            openPaymentModal();
+        }
+    });
+}
+
+function openCart() {
+    document.getElementById('cartSidebar').classList.add('active');
+    document.getElementById('cartOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeCartSidebar() {
+    document.getElementById('cartSidebar').classList.remove('active');
+    document.getElementById('cartOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function addToCart() {
+    const spice = document.querySelector('input[name="spice"]:checked').value;
+    const oil = document.querySelector('input[name="oil"]:checked').value;
+    const instructions = document.getElementById('specialInstructions').value;
+
+    const cartItem = {
+        id: Date.now(),
+        itemId: currentItem.id,
+        name: currentItem.name,
+        price: currentItem.price,
+        image: currentItem.image,
+        quantity: currentQuantity,
+        spice: spice,
+        oil: oil,
+        instructions: instructions
+    };
+
+    cart.push(cartItem);
+    updateCartUI();
+    closeCustomizeModal();
+
+    // Show brief notification
+    showNotification(`${currentItem.name} added to cart!`);
+}
+
+function removeFromCart(cartItemId) {
+    cart = cart.filter(item => item.id !== cartItemId);
+    updateCartUI();
+}
+
+function updateItemQuantity(cartItemId, change) {
+    const item = cart.find(i => i.id === cartItemId);
+    if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+            removeFromCart(cartItemId);
+        } else {
+            updateCartUI();
+        }
+    }
+}
+
+function updateCartUI() {
+    const cartItems = document.getElementById('cartItems');
+    const cartBadge = document.getElementById('cartBadge');
+    const cartCount = document.getElementById('cartCount');
+    const subtotalEl = document.getElementById('subtotal');
+    const discountRow = document.getElementById('discountRow');
+    const discountAmount = document.getElementById('discountAmount');
+    const totalAmount = document.getElementById('totalAmount');
+    const minOrderWarning = document.getElementById('minOrderWarning');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartBadge.textContent = totalItems;
+    if (cartCount) cartCount.textContent = totalItems;
+
+    if (cart.length === 0) {
+        cartItems.innerHTML = `
+            <div class="cart-empty">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Your cart is empty</p>
+            </div>
+        `;
+    } else {
+        cartItems.innerHTML = cart.map(item => `
+            <div class="cart-item">
+                <div class="cart-item-image">
+                    <img src="${item.image}" alt="${item.name}">
+                </div>
+                <div class="cart-item-details">
+                    <h4>${item.name}</h4>
+                    <div class="customization">
+                        ${item.spice !== 'normal' ? `<span>${item.spice} spicy</span>` : ''}
+                        ${item.oil !== 'normal' ? `<span>${item.oil} oil</span>` : ''}
+                        ${item.instructions ? `<span>"${item.instructions.substring(0, 20)}..."</span>` : ''}
+                    </div>
+                    <span class="item-price">₹${item.price * item.quantity}</span>
+                </div>
+                <div class="cart-item-actions">
+                    <button class="remove-item" onclick="removeFromCart(${item.id})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <div class="qty-controls">
+                        <button onclick="updateItemQuantity(${item.id}, -1)"><i class="fas fa-minus"></i></button>
+                        <span>${item.quantity}</span>
+                        <button onclick="updateItemQuantity(${item.id}, 1)"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    const subtotal = getSubtotal();
+    const discount = calculateDiscount(subtotal);
+    const total = subtotal - discount;
+
+    subtotalEl.textContent = `₹${subtotal}`;
+
+    if (discount > 0) {
+        discountRow.style.display = 'flex';
+        discountAmount.textContent = `-₹${discount}`;
+    } else {
+        discountRow.style.display = 'none';
+    }
+
+    totalAmount.textContent = `₹${total}`;
+
+    if (subtotal < 500) {
+        minOrderWarning.classList.remove('hidden');
+        checkoutBtn.disabled = true;
+    } else {
+        minOrderWarning.classList.add('hidden');
+        checkoutBtn.disabled = false;
+    }
+}
+
+function getSubtotal() {
+    return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+}
+
+function calculateDiscount(subtotal) {
+    if (subtotal >= 2000) {
+        return Math.min(subtotal * 0.15, 200); // 15% up to ₹200
+    } else if (subtotal >= 800) {
+        return Math.min(subtotal * 0.10, 100); // 10% up to ₹100
+    }
+    return 0;
+}
+
+// Modals
+function initModals() {
+    const customizeModal = document.getElementById('customizeModal');
+    const closeCustomize = document.getElementById('closeCustomize');
+    const qtyMinus = document.getElementById('qtyMinus');
+    const qtyPlus = document.getElementById('qtyPlus');
+    const addToCartBtn = document.getElementById('addToCartBtn');
+
+    closeCustomize.addEventListener('click', closeCustomizeModal);
+    customizeModal.addEventListener('click', (e) => {
+        if (e.target === customizeModal) closeCustomizeModal();
+    });
+
+    qtyMinus.addEventListener('click', () => {
+        if (currentQuantity > 1) {
+            currentQuantity--;
+            document.getElementById('qtyValue').textContent = currentQuantity;
+            updateItemTotal();
+        }
+    });
+
+    qtyPlus.addEventListener('click', () => {
+        currentQuantity++;
+        document.getElementById('qtyValue').textContent = currentQuantity;
+        updateItemTotal();
+    });
+
+    addToCartBtn.addEventListener('click', addToCart);
+
+    // Payment modal
+    const closePayment = document.getElementById('closePayment');
+    const paymentModal = document.getElementById('paymentModal');
+    const copyUPI = document.getElementById('copyUPI');
+    const confirmOrderBtn = document.getElementById('confirmOrderBtn');
+
+    closePayment.addEventListener('click', closePaymentModal);
+    paymentModal.addEventListener('click', (e) => {
+        if (e.target === paymentModal) closePaymentModal();
+    });
+
+    copyUPI.addEventListener('click', () => {
+        navigator.clipboard.writeText('7517972020@ybl');
+        showNotification('UPI ID copied!');
+    });
+
+    confirmOrderBtn.addEventListener('click', confirmOrder);
+}
+
+function closeCustomizeModal() {
+    document.getElementById('customizeModal').classList.remove('active');
+}
+
+function openPaymentModal() {
+    const paymentModal = document.getElementById('paymentModal');
+    const orderSummaryItems = document.getElementById('orderSummaryItems');
+    const finalTotal = document.getElementById('finalTotal');
+
+    const subtotal = getSubtotal();
+    const discount = calculateDiscount(subtotal);
+    const total = subtotal - discount;
+
+    orderSummaryItems.innerHTML = cart.map(item => `
+        <div class="summary-row">
+            <span>${item.name} x${item.quantity}</span>
+            <span>₹${item.price * item.quantity}</span>
+        </div>
+    `).join('');
+
+    if (discount > 0) {
+        orderSummaryItems.innerHTML += `
+            <div class="summary-row discount">
+                <span>Discount</span>
+                <span>-₹${discount}</span>
+            </div>
+        `;
+    }
+
+    finalTotal.textContent = `₹${total}`;
+    paymentModal.classList.add('active');
+}
+
+function closePaymentModal() {
+    document.getElementById('paymentModal').classList.remove('active');
+}
+
+function confirmOrder() {
+    const name = document.getElementById('customerName').value.trim();
+    const phone = document.getElementById('customerPhone').value.trim();
+    const address = document.getElementById('customerAddress').value.trim();
+
+    if (!name || !phone || !address) {
+        showNotification('Please fill all delivery details!', 'error');
+        return;
+    }
+
+    const subtotal = getSubtotal();
+    const discount = calculateDiscount(subtotal);
+    const total = subtotal - discount;
+
+    // Build WhatsApp message
+    let message = `🍽️ *NEW ORDER - Hotel Pranjal*\n\n`;
+    message += `👤 *Customer:* ${name}\n`;
+    message += `📱 *Phone:* ${phone}\n`;
+    message += `📍 *Address:* ${address}\n\n`;
+    message += `📋 *Order Details:*\n`;
+    message += `─────────────────\n`;
+
+    cart.forEach(item => {
+        message += `• ${item.name} x${item.quantity} = ₹${item.price * item.quantity}\n`;
+        if (item.spice !== 'normal') message += `  ↳ ${item.spice} spicy\n`;
+        if (item.oil !== 'normal') message += `  ↳ ${item.oil} oil\n`;
+        if (item.instructions) message += `  ↳ "${item.instructions}"\n`;
+    });
+
+    message += `─────────────────\n`;
+    message += `💰 Subtotal: ₹${subtotal}\n`;
+    if (discount > 0) {
+        message += `🎉 Discount: -₹${discount}\n`;
+    }
+    message += `*💵 Total: ₹${total}*\n\n`;
+    message += `💳 *Payment via UPI*\n`;
+    message += `📍 *Delivery within 2 KM*\n`;
+    message += `⏰ *Expected: 30-60 mins*\n\n`;
+    message += `_Thank you for ordering!_`;
+
+    const whatsappURL = `https://wa.me/917517972020?text=${encodeURIComponent(message)}`;
+    window.open(whatsappURL, '_blank');
+
+    // Clear cart after order
+    cart = [];
+    updateCartUI();
+    closePaymentModal();
+
+    showNotification('Order sent! Check WhatsApp to confirm.', 'success');
+}
+
+// Feedback
+function initFeedback() {
+    const starRating = document.getElementById('starRating');
+    const stars = starRating.querySelectorAll('i');
+    let selectedRating = 0;
+
+    stars.forEach(star => {
+        star.addEventListener('click', function () {
+            selectedRating = parseInt(this.dataset.rating);
+            stars.forEach((s, i) => {
+                s.classList.toggle('active', i < selectedRating);
+            });
+        });
+
+        star.addEventListener('mouseenter', function () {
+            const rating = parseInt(this.dataset.rating);
+            stars.forEach((s, i) => {
+                s.style.color = i < rating ? '#D4AF37' : '#D0C8BD';
+            });
+        });
+
+        star.addEventListener('mouseleave', function () {
+            stars.forEach((s, i) => {
+                s.style.color = i < selectedRating ? '#D4AF37' : '#D0C8BD';
             });
         });
     });
-}
 
-/* =============================================
-   REVIEWS SLIDER
-   ============================================= */
-function initReviewsSlider() {
-    const track = document.getElementById('reviewsTrack');
-    const prevBtn = document.getElementById('reviewPrev');
-    const nextBtn = document.getElementById('reviewNext');
-    
-    if (!track || !prevBtn || !nextBtn) return;
-    
-    const cards = track.querySelectorAll('.review-card');
-    let currentIndex = 0;
-    let cardsPerView = getCardsPerView();
-    
-    function getCardsPerView() {
-        if (window.innerWidth <= 768) return 1;
-        if (window.innerWidth <= 1200) return 2;
-        return 3;
-    }
-    
-    function updateSlider() {
-        const cardWidth = cards[0].offsetWidth + 30; // Including gap
-        const maxIndex = Math.max(0, cards.length - cardsPerView);
-        currentIndex = Math.min(currentIndex, maxIndex);
-        track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-    }
-    
-    nextBtn.addEventListener('click', () => {
-        const maxIndex = cards.length - cardsPerView;
-        if (currentIndex < maxIndex) {
-            currentIndex++;
-            updateSlider();
+    document.getElementById('feedbackForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const name = document.getElementById('feedbackName').value;
+        const phone = document.getElementById('feedbackPhone').value;
+        const message = document.getElementById('feedbackMessage').value;
+
+        if (selectedRating === 0) {
+            showNotification('Please select a rating!', 'error');
+            return;
         }
-    });
-    
-    prevBtn.addEventListener('click', () => {
-        if (currentIndex > 0) {
-            currentIndex--;
-            updateSlider();
-        }
-    });
-    
-    // Update on resize
-    window.addEventListener('resize', () => {
-        cardsPerView = getCardsPerView();
-        currentIndex = 0;
-        updateSlider();
-    });
-    
-    // Auto slide
-    let autoSlide = setInterval(() => {
-        const maxIndex = cards.length - cardsPerView;
-        currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
-        updateSlider();
-    }, 5000);
-    
-    // Pause on hover
-    track.addEventListener('mouseenter', () => clearInterval(autoSlide));
-    track.addEventListener('mouseleave', () => {
-        autoSlide = setInterval(() => {
-            const maxIndex = cards.length - cardsPerView;
-            currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
-            updateSlider();
-        }, 5000);
+
+        let feedback = `⭐ *FEEDBACK - Hotel Pranjal*\n\n`;
+        feedback += `👤 *Name:* ${name}\n`;
+        feedback += `📱 *Phone:* ${phone}\n`;
+        feedback += `⭐ *Rating:* ${'★'.repeat(selectedRating)}${'☆'.repeat(5 - selectedRating)}\n`;
+        feedback += `💬 *Feedback:* ${message}`;
+
+        const whatsappURL = `https://wa.me/917517972020?text=${encodeURIComponent(feedback)}`;
+        window.open(whatsappURL, '_blank');
+
+        this.reset();
+        selectedRating = 0;
+        stars.forEach(s => s.classList.remove('active'));
+        showNotification('Thank you for your feedback!', 'success');
     });
 }
 
-/* =============================================
-   BACK TO TOP
-   ============================================= */
-function initBackToTop() {
+// Scroll Effects
+function initScrollEffects() {
     const backToTop = document.getElementById('backToTop');
-    
-    window.addEventListener('scroll', function() {
+
+    window.addEventListener('scroll', () => {
         if (window.scrollY > 500) {
             backToTop.classList.add('visible');
         } else {
@@ -270,242 +527,56 @@ function initBackToTop() {
     });
 }
 
-/* =============================================
-   PARTICLES EFFECT
-   ============================================= */
-function initParticles() {
-    const container = document.getElementById('particles');
-    if (!container) return;
-    
-    const particleCount = 30;
-    
-    for (let i = 0; i < particleCount; i++) {
-        createParticle(container);
-    }
-}
+// Notification
+function showNotification(message, type = 'success') {
+    const existing = document.querySelector('.notification');
+    if (existing) existing.remove();
 
-function createParticle(container) {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    
-    const size = Math.random() * 5 + 2;
-    const x = Math.random() * 100;
-    const delay = Math.random() * 5;
-    const duration = Math.random() * 10 + 10;
-    const opacity = Math.random() * 0.3 + 0.1;
-    
-    particle.style.cssText = `
-        position: absolute;
-        width: ${size}px;
-        height: ${size}px;
-        background: rgba(212, 175, 55, ${opacity});
-        border-radius: 50%;
-        left: ${x}%;
-        top: 100%;
-        animation: particleFloat ${duration}s linear ${delay}s infinite;
-        pointer-events: none;
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+        <span>${message}</span>
     `;
-    
-    container.appendChild(particle);
-    
-    // Add animation keyframes
-    if (!document.getElementById('particle-animation')) {
-        const style = document.createElement('style');
-        style.id = 'particle-animation';
-        style.textContent = `
-            @keyframes particleFloat {
-                0% {
-                    transform: translateY(0) rotate(0deg);
-                    opacity: 0;
-                }
-                10% {
-                    opacity: 1;
-                }
-                90% {
-                    opacity: 1;
-                }
-                100% {
-                    transform: translateY(-100vh) rotate(720deg);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-}
-
-/* =============================================
-   COUNTER ANIMATION
-   ============================================= */
-function animateCounter(element, target, duration = 2000) {
-    const start = 0;
-    const increment = target / (duration / 16);
-    let current = start;
-    
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            element.textContent = target;
-            clearInterval(timer);
-        } else {
-            element.textContent = Math.floor(current);
-        }
-    }, 16);
-}
-
-/* =============================================
-   FORM VALIDATION (if contact form is added)
-   ============================================= */
-function validateForm(form) {
-    const inputs = form.querySelectorAll('input[required], textarea[required]');
-    let isValid = true;
-    
-    inputs.forEach(input => {
-        if (!input.value.trim()) {
-            isValid = false;
-            input.classList.add('error');
-        } else {
-            input.classList.remove('error');
-        }
-    });
-    
-    return isValid;
-}
-
-/* =============================================
-   LAZY LOADING IMAGES
-   ============================================= */
-function initLazyLoading() {
-    const images = document.querySelectorAll('img[data-src]');
-    
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-                imageObserver.unobserve(img);
-            }
-        });
-    });
-    
-    images.forEach(img => imageObserver.observe(img));
-}
-
-/* =============================================
-   GALLERY LIGHTBOX
-   ============================================= */
-function initGalleryLightbox() {
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    
-    galleryItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const img = this.querySelector('img');
-            const lightbox = createLightbox(img.src);
-            document.body.appendChild(lightbox);
-            
-            setTimeout(() => lightbox.classList.add('active'), 10);
-        });
-    });
-}
-
-function createLightbox(src) {
-    const lightbox = document.createElement('div');
-    lightbox.className = 'lightbox';
-    lightbox.innerHTML = `
-        <div class="lightbox-content">
-            <img src="${src}" alt="Gallery Image">
-            <button class="lightbox-close">&times;</button>
-        </div>
-    `;
-    
-    lightbox.style.cssText = `
+    notification.style.cssText = `
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.95);
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: ${type === 'success' ? '#28a745' : '#dc3545'};
+        color: white;
+        padding: 12px 24px;
+        border-radius: 50px;
+        font-size: 0.9rem;
         display: flex;
         align-items: center;
-        justify-content: center;
+        gap: 8px;
         z-index: 10000;
-        opacity: 0;
-        transition: opacity 0.3s ease;
+        animation: slideDown 0.3s ease;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
     `;
-    
-    const content = lightbox.querySelector('.lightbox-content');
-    content.style.cssText = `
-        position: relative;
-        max-width: 90%;
-        max-height: 90%;
-    `;
-    
-    const img = lightbox.querySelector('img');
-    img.style.cssText = `
-        max-width: 100%;
-        max-height: 90vh;
-        border-radius: 10px;
-    `;
-    
-    const closeBtn = lightbox.querySelector('.lightbox-close');
-    closeBtn.style.cssText = `
-        position: absolute;
-        top: -40px;
-        right: 0;
-        background: none;
-        border: none;
-        color: white;
-        font-size: 2.5rem;
-        cursor: pointer;
-    `;
-    
-    closeBtn.addEventListener('click', () => closeLightbox(lightbox));
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) closeLightbox(lightbox);
-    });
-    
-    return lightbox;
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.style.animation = 'slideUp 0.3s ease forwards';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
 }
 
-function closeLightbox(lightbox) {
-    lightbox.classList.remove('active');
-    lightbox.style.opacity = '0';
-    setTimeout(() => lightbox.remove(), 300);
-}
+// Add notification animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideDown {
+        from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+        to { transform: translateX(-50%) translateY(0); opacity: 1; }
+    }
+    @keyframes slideUp {
+        from { transform: translateX(-50%) translateY(0); opacity: 1; }
+        to { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+    }
+`;
+document.head.appendChild(style);
 
-// Initialize lightbox
-document.addEventListener('DOMContentLoaded', initGalleryLightbox);
-
-/* =============================================
-   UTILITY FUNCTIONS
-   ============================================= */
-
-// Debounce function for performance
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Throttle function for scroll events
-function throttle(func, limit) {
-    let inThrottle;
-    return function(...args) {
-        if (!inThrottle) {
-            func.apply(this, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    };
-}
-
-console.log('🍽️ Hotel Pranjal Website Loaded Successfully!');
-console.log('📍 Visit us at: Madha Road, Kurduwadi');
-console.log('📞 Call: +91 7517-972-020');
+console.log('🍽️ Hotel Pranjal Website Loaded!');
+console.log('📍 Kurduwadi | 📞 +91 75179 72020');
