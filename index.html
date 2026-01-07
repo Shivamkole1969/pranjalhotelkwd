@@ -319,30 +319,50 @@
             <span class="cart-badge" id="cartBadge">0</span>
             <span>Cart</span>
         </a>
-        <a href="#about" class="nav-item" data-section="about">
-            <i class="fas fa-info-circle"></i>
-            <span>About</span>
-        </a>
+        <button class="nav-item dark-mode-nav" id="darkModeToggleMobile">
+            <i class="fas fa-moon" id="darkModeIconMobile"></i>
+            <span>Theme</span>
+        </button>
         <a href="#contact" class="nav-item" data-section="contact">
             <i class="fas fa-phone"></i>
             <span>Contact</span>
         </a>
     </nav>
 
+    <!-- Mobile Live Status Bar -->
+    <div class="mobile-status-bar" id="mobileStatusBar">
+        <span class="status-dot"></span>
+        <span class="status-text" id="mobileStatusText">Open Now</span>
+    </div>
+
     <!-- Desktop Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="#home" class="logo">
+                <img src="logo.png" alt="Hotel Pranjal Logo" class="logo-image">
                 <span class="logo-text">Hotel</span>
                 <span class="logo-accent">Pranjal</span>
             </a>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="#menu" class="nav-link">Order Online</a></li>
-                <li><a href="#about" class="nav-link">About Us</a></li>
                 <li><a href="#partyhall" class="nav-link">Party Hall</a></li>
                 <li><a href="#feedback" class="nav-link">Feedback</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#about" class="nav-link">About Us</a></li>
+                <li>
+                    <!-- Live Open/Closed Status -->
+                    <div class="live-status" id="liveStatusDesktop">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Open Now</span>
+                    </div>
+                </li>
+                <li>
+                    <!-- Dark Mode Toggle -->
+                    <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle Dark Mode">
+                        <i class="fas fa-moon" id="darkModeIcon"></i>
+                    </button>
+                </li>
                 <li>
                     <a href="#" class="nav-btn cart-btn" id="desktopCartBtn">
                         <i class="fas fa-shopping-cart"></i> Cart
@@ -446,20 +466,22 @@
     <!-- Offers Banner -->
     <section class="offers-section">
         <div class="container">
-            <div class="offers-scroll">
-                <div class="offer-card">
-                    <div class="offer-icon"><i class="fas fa-percent"></i></div>
+            <div class="offers-scroll offers-animated">
+                <div class="offer-card offer-animate offer-glow">
+                    <div class="offer-icon offer-pulse"><i class="fas fa-percent"></i></div>
                     <div class="offer-text">
-                        <h4>10% OFF</h4>
+                        <h4 class="offer-percentage">10% OFF</h4>
                         <p>On orders above ₹800 (up to ₹100)</p>
                     </div>
+                    <div class="offer-shine"></div>
                 </div>
-                <div class="offer-card highlight">
-                    <div class="offer-icon"><i class="fas fa-gift"></i></div>
+                <div class="offer-card highlight offer-animate offer-glow">
+                    <div class="offer-icon offer-pulse"><i class="fas fa-gift"></i></div>
                     <div class="offer-text">
-                        <h4>15% OFF</h4>
-                        <p>On orders above ₹2000 (up to ₹200)</p>
+                        <h4 class="offer-percentage">15% OFF</h4>
+                        <p>On orders above ₹2000 (₹300 off max)</p>
                     </div>
+                    <div class="offer-shine"></div>
                 </div>
             </div>
         </div>
@@ -616,8 +638,6 @@
                         alt="Hotel Pranjal Function Hall - Corporate Events Venue" loading="lazy"></div>
                 <div class="gallery-item"><img src="hall5.jpeg"
                         alt="Best Party Hall in Kurduwadi - Engagement Ceremony Setup" loading="lazy"></div>
-                <div class="gallery-item"><img src="hall 6.jpeg" alt="Hotel Pranjal Catering Setup - Wedding Reception"
-                        loading="lazy"></div>
                 <div class="gallery-item"><img src="hall 7.jpeg"
                         alt="Spacious AC Banquet Hall Kurduwadi - 200 Guest Capacity" loading="lazy"></div>
             </div>
@@ -636,9 +656,9 @@
                     <p>Tailored menu as per your needs</p>
                 </div>
                 <div class="catering-card">
-                    <i class="fas fa-truck"></i>
-                    <h4>Outdoor Catering</h4>
-                    <p>We cater at your venue too</p>
+                    <i class="fas fa-building"></i>
+                    <h4>Indoor Catering</h4>
+                    <p>Premium catering at our party hall</p>
                 </div>
                 <div class="catering-card">
                     <i class="fas fa-rupee-sign"></i>
@@ -895,6 +915,36 @@
                         alt="Website QR Code">
                 </div>
                 <p class="qr-url">hotelpranjal.in</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thank You Section -->
+    <section class="thank-you-section" id="thankyou">
+        <div class="container">
+            <div class="thank-you-content">
+                <div class="thank-you-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h2 class="thank-you-title">Thank You for Visiting Us!</h2>
+                <p class="thank-you-message">
+                    We are grateful for your trust in Hotel Pranjal. Your satisfaction is our greatest reward.
+                    <br>We look forward to serving you again soon!
+                </p>
+                <div class="thank-you-quote">
+                    <i class="fas fa-quote-left"></i>
+                    <span>"Good food is the foundation of genuine happiness"</span>
+                    <i class="fas fa-quote-right"></i>
+                </div>
+                <div class="thank-you-cta">
+                    <a href="https://wa.me/917517972020?text=Hi%2C%20I%27d%20like%20to%20order%20from%20Hotel%20Pranjal"
+                        class="btn btn-primary" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Order Now
+                    </a>
+                    <a href="#home" class="btn btn-secondary">
+                        <i class="fas fa-arrow-up"></i> Back to Top
+                    </a>
+                </div>
             </div>
         </div>
     </section>

@@ -477,7 +477,7 @@ function getSubtotal() {
 
 function calculateDiscount(subtotal) {
     if (subtotal >= 2000) {
-        return Math.min(subtotal * 0.15, 200);
+        return Math.min(subtotal * 0.15, 300);
     } else if (subtotal >= 800) {
         return Math.min(subtotal * 0.10, 100);
     }
@@ -895,3 +895,155 @@ function toggleFaq(button) {
 console.log('🍽️ Hotel Pranjal - Best Veg Restaurant in Kurduwadi');
 console.log('📍 Madha Road, Kurduwadi | 📞 +91 75179 72020');
 console.log('🏢 GSTIN: 27KXQPS3637L1ZC');
+
+// =============================================
+// DARK MODE FUNCTIONALITY
+// =============================================
+
+function initDarkMode() {
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const darkModeToggleMobile = document.getElementById('darkModeToggleMobile');
+    const darkModeIcon = document.getElementById('darkModeIcon');
+    const darkModeIconMobile = document.getElementById('darkModeIconMobile');
+
+    // Check for saved preference - Default is light mode
+    // Only enable dark mode if user explicitly saved it as 'dark'
+    const savedTheme = localStorage.getItem('hotelPranjalTheme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        updateDarkModeIcons(true);
+    } else {
+        // Ensure light mode is default - remove dark-mode class if present
+        document.body.classList.remove('dark-mode');
+        updateDarkModeIcons(false);
+    }
+
+    // Desktop toggle
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', toggleDarkMode);
+    }
+
+    // Mobile toggle
+    if (darkModeToggleMobile) {
+        darkModeToggleMobile.addEventListener('click', toggleDarkMode);
+    }
+}
+
+function toggleDarkMode() {
+    const isDark = document.body.classList.toggle('dark-mode');
+    localStorage.setItem('hotelPranjalTheme', isDark ? 'dark' : 'light');
+    updateDarkModeIcons(isDark);
+
+    // Show notification
+    showNotification(isDark ? '🌙 Dark mode enabled' : '☀️ Light mode enabled');
+}
+
+function updateDarkModeIcons(isDark) {
+    const darkModeIcon = document.getElementById('darkModeIcon');
+    const darkModeIconMobile = document.getElementById('darkModeIconMobile');
+
+    if (darkModeIcon) {
+        darkModeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+    }
+    if (darkModeIconMobile) {
+        darkModeIconMobile.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+    }
+}
+
+// =============================================
+// LIVE STATUS INDICATOR
+// =============================================
+
+function updateLiveStatusIndicators() {
+    const liveStatusDesktop = document.getElementById('liveStatusDesktop');
+    const mobileStatusBar = document.getElementById('mobileStatusBar');
+    const mobileStatusText = document.getElementById('mobileStatusText');
+
+    // Get current IST time
+    const now = new Date();
+    const istOffset = 5.5 * 60; // IST is UTC+5:30
+    const utcOffset = now.getTimezoneOffset();
+    const istTime = new Date(now.getTime() + (utcOffset + istOffset) * 60000);
+    const currentHour = istTime.getHours();
+    const currentMinute = istTime.getMinutes();
+
+    const isOpen = currentHour >= RESTAURANT_OPEN_HOUR && currentHour < RESTAURANT_CLOSE_HOUR;
+
+    // Only show "Open Now" status during hotel operating hours
+    // Hide status indicators when restaurant is closed
+    if (isOpen) {
+        // Calculate time until close
+        const hoursUntilClose = RESTAURANT_CLOSE_HOUR - currentHour - 1;
+        const minutesUntilClose = 60 - currentMinute;
+        let statusMessage = '';
+        if (hoursUntilClose <= 1) {
+            statusMessage = `Open • Closes in ${hoursUntilClose}h ${minutesUntilClose}m`;
+        } else {
+            statusMessage = 'Open Now • 12 PM - 10 PM';
+        }
+
+        // Show and update desktop status
+        if (liveStatusDesktop) {
+            liveStatusDesktop.style.display = 'flex';
+            const statusText = liveStatusDesktop.querySelector('.status-text');
+            if (statusText) {
+                statusText.textContent = 'Open Now';
+            }
+            liveStatusDesktop.classList.remove('closed');
+        }
+
+        // Show and update mobile status bar
+        if (mobileStatusBar) {
+            mobileStatusBar.style.display = 'flex';
+            mobileStatusBar.classList.remove('closed');
+        }
+        if (mobileStatusText) {
+            mobileStatusText.textContent = statusMessage;
+        }
+    } else {
+        // Hide status indicators when restaurant is closed
+        if (liveStatusDesktop) {
+            liveStatusDesktop.style.display = 'none';
+        }
+        if (mobileStatusBar) {
+            mobileStatusBar.style.display = 'none';
+        }
+    }
+}
+
+// =============================================
+// SCROLL ANIMATIONS
+// =============================================
+
+function initScrollAnimations() {
+    const animatedElements = document.querySelectorAll('.section-header, .menu-card, .contact-card, .review-card, .faq-item');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-on-scroll', 'visible');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    animatedElements.forEach(el => {
+        el.classList.add('animate-on-scroll');
+        observer.observe(el);
+    });
+}
+
+// Initialize new features on DOM load
+document.addEventListener('DOMContentLoaded', function () {
+    // Initialize dark mode
+    initDarkMode();
+
+    // Update live status indicators
+    updateLiveStatusIndicators();
+    setInterval(updateLiveStatusIndicators, 60000); // Update every minute
+
+    // Initialize scroll animations
+    setTimeout(initScrollAnimations, 100);
+});
