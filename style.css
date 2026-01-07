@@ -771,17 +771,19 @@ button {
 .sub-title {
     display: block;
     font-size: 0.9rem;
-    color: var(--gray-300);
+    color: rgba(255, 255, 255, 0.85);
     font-weight: 400;
     margin-top: 10px;
     letter-spacing: 2px;
     text-transform: uppercase;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .hero-description {
     font-size: 0.95rem;
-    color: var(--gray-300);
+    color: rgba(255, 255, 255, 0.8);
     margin: 0 auto 25px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .hero-cta {
