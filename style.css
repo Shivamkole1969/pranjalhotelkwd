@@ -254,7 +254,7 @@ button {
 
 /* GSTIN in Footer */
 .gstin {
-    color: var(--gray-400);
+    color: #c0c0c0;
     font-size: 0.75rem;
     margin-top: 5px;
 }
@@ -608,7 +608,8 @@ button {
 }
 
 .logo-text {
-    color: var(--white);
+    color: var(--primary);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .logo-accent {
@@ -1683,12 +1684,13 @@ button {
 .footer-brand h3 {
     font-family: var(--font-display);
     font-size: 1.3rem;
-    color: var(--white);
+    color: var(--primary);
     margin-bottom: 5px;
+    text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
 }
 
 .footer-brand p {
-    color: var(--gray-400);
+    color: #e0e0e0;
     font-size: 0.8rem;
     margin-bottom: 15px;
 }
@@ -1703,14 +1705,15 @@ button {
 .footer-links a {
     width: 40px;
     height: 40px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--white);
+    color: #ffffff;
     font-size: 1.1rem;
     transition: 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .footer-links a:hover {
@@ -1719,7 +1722,7 @@ button {
 }
 
 .copyright {
-    color: var(--gray-500);
+    color: #b0b0b0;
     font-size: 0.75rem;
 }
 
