@@ -1726,15 +1726,8 @@ button {
     font-size: 0.75rem;
 }
 
-.developer-link {
-    color: var(--primary);
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.developer-link:hover {
-    color: #fff;
-    text-decoration: underline;
+.developer-name {
+    color: #b0b0b0;
 }
 
 /* Cart Sidebar */
