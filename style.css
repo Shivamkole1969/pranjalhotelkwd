@@ -3445,13 +3445,14 @@ button {
 .thank-you-title {
     font-family: var(--font-display);
     font-size: 2.2rem;
-    color: var(--white);
+    color: var(--primary);
     margin-bottom: 20px;
+    text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
 }
 
 .thank-you-message {
     font-size: 1.1rem;
-    color: var(--gray-300);
+    color: #e8e2d9;
     line-height: 1.8;
     margin-bottom: 25px;
 }
