@@ -558,7 +558,7 @@ button {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 15px 0;
+    padding: 12px 0;
     z-index: 1000;
     background: rgba(44, 24, 16, 0.95);
     backdrop-filter: blur(10px);
@@ -566,26 +566,30 @@ button {
 }
 
 .nav-container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-/* Ganesh Navbar Icon - Small Circle */
+/* Left Section - Ganesh at extreme left */
+.nav-left {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
 .navbar-ganesh {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 15px;
-    flex-shrink: 0;
 }
 
 .ganesh-circle-img {
-    width: 48px;
-    height: 48px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid var(--primary);
@@ -598,20 +602,29 @@ button {
     box-shadow: 0 0 25px rgba(212, 175, 55, 0.8), 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
+/* Center Section - Logo + Nav Links */
+.nav-center {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex: 1;
+    justify-content: center;
+}
+
 .logo {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     font-family: var(--font-display);
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 600;
-    /* Circular separator container */
     background: linear-gradient(135deg, rgba(44, 24, 16, 0.95) 0%, rgba(30, 15, 10, 0.98) 100%);
-    padding: 10px 22px 10px 12px;
+    padding: 8px 18px 8px 10px;
     border-radius: 60px;
     border: 3px solid var(--primary);
     box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
+    flex-shrink: 0;
 }
 
 .logo:hover {
@@ -622,8 +635,8 @@ button {
 }
 
 .logo-image {
-    height: 45px;
-    width: 45px;
+    height: 40px;
+    width: 40px;
     border-radius: 50%;
     object-fit: cover;
     object-position: center;
@@ -640,17 +653,18 @@ button {
     color: var(--primary);
 }
 
-.nav-menu {
+.nav-links {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    gap: 25px;
+    gap: 22px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-.nav-menu li {
+.nav-links li {
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 .nav-link {
@@ -667,6 +681,14 @@ button {
 .nav-link.active {
     color: var(--primary);
     text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+/* Right Section - Cart at extreme right */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
 }
 
 .nav-btn {
@@ -1822,6 +1844,20 @@ button {
 .review-stars {
     color: var(--primary);
     font-size: 0.7rem;
+}
+
+.review-source {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.7rem;
+    color: var(--gray-400);
+    margin-top: 3px;
+}
+
+.review-source i {
+    color: #4285F4;
+    font-size: 0.8rem;
 }
 
 .review-text {
@@ -4738,4 +4774,51 @@ body.dark-mode .developer-credit {
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
     border-color: var(--primary);
+}
+
+/* =============================================
+   DEVELOPER CREDIT - Vertical Text in Footer (Bottom Right)
+   ============================================= */
+.developer-credit {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+
+    /* Vertical text - bottom to upward */
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+
+    /* Styling - White color as requested */
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.6);
+
+    /* No background - clean look */
+    background: transparent;
+    padding: 0;
+
+    /* Subtle hover effect */
+    transition: all 0.3s ease;
+}
+
+.developer-credit:hover {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Footer needs relative positioning for absolute child */
+footer .footer-content {
+    position: relative;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .developer-credit {
+        bottom: 15px;
+        right: 15px;
+        font-size: 0.6rem;
+        letter-spacing: 0.5px;
+    }
 }

@@ -347,42 +347,44 @@
     <!-- Desktop Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <!-- Ganesh Icon in Navbar -->
-            <a href="#home" class="navbar-ganesh">
-                <img src="Ganesh.webp" alt="Ganpati Bappa" class="ganesh-circle-img">
-            </a>
-            <a href="#home" class="logo">
-                <img src="logo.png" alt="Hotel Pranjal Logo" class="logo-image">
-                <span class="logo-text">Hotel</span>
-                <span class="logo-accent">Pranjal</span>
-            </a>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#menu" class="nav-link">Order Online</a></li>
-                <li><a href="#partyhall" class="nav-link">Party Hall</a></li>
-                <li><a href="#feedback" class="nav-link">Feedback</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-                <li><a href="#about" class="nav-link">About Us</a></li>
-                <li>
-                    <!-- Live Open/Closed Status -->
-                    <div class="live-status" id="liveStatusDesktop">
-                        <span class="status-dot"></span>
-                        <span class="status-text">Open Now</span>
-                    </div>
-                </li>
-                <li>
-                    <!-- Dark Mode Toggle -->
-                    <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle Dark Mode">
-                        <i class="fas fa-moon" id="darkModeIcon"></i>
-                    </button>
-                </li>
-                <li>
-                    <a href="#" class="nav-btn cart-btn" id="desktopCartBtn">
-                        <i class="fas fa-shopping-cart"></i> Cart
-                        <span class="cart-count" id="cartCount">0</span>
-                    </a>
-                </li>
-            </ul>
+            <!-- Left Section - Ganesh Icon at Extreme Left -->
+            <div class="nav-left">
+                <a href="#home" class="navbar-ganesh">
+                    <img src="Ganesh.webp" alt="Ganpati Bappa" class="ganesh-circle-img">
+                </a>
+            </div>
+
+            <!-- Center Section - Logo + Navigation Links -->
+            <div class="nav-center">
+                <a href="#home" class="logo">
+                    <img src="logo.png" alt="Hotel Pranjal Logo" class="logo-image">
+                    <span class="logo-text">Hotel</span>
+                    <span class="logo-accent">Pranjal</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#menu" class="nav-link">Order Online</a></li>
+                    <li><a href="#partyhall" class="nav-link">Party Hall</a></li>
+                    <li><a href="#feedback" class="nav-link">Feedback</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li><a href="#about" class="nav-link">About Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Right Section - Status, Dark Mode, Cart at Extreme Right -->
+            <div class="nav-right">
+                <div class="live-status" id="liveStatusDesktop">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Open Now</span>
+                </div>
+                <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle Dark Mode">
+                    <i class="fas fa-moon" id="darkModeIcon"></i>
+                </button>
+                <a href="#" class="nav-btn cart-btn" id="desktopCartBtn">
+                    <i class="fas fa-shopping-cart"></i> Cart
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -763,38 +765,107 @@
         <div class="reviews-grid">
             <div class="review-card">
                 <div class="review-header">
-                    <div class="reviewer-avatar"><span>RK</span></div>
+                    <div class="reviewer-avatar"><span>AP</span></div>
                     <div class="reviewer-info">
-                        <h4>Rajesh Kumar</h4>
+                        <h4>Amit Patil</h4>
                         <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                                 class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <span class="review-source"><i class="fab fa-google"></i> Google Review</span>
                     </div>
                 </div>
-                <p class="review-text">"Best vegetarian restaurant in Kurduwadi! Amazing food and quick delivery!"
-                </p>
+                <p class="review-text">"खूप छान फूड! कुर्डुवाडीतील सर्वोत्तम शुद्ध शाकाहारी हॉटेल. पनीर बटर मसाला आणि
+                    रोटी एकदम perfect होती!"</p>
             </div>
             <div class="review-card">
                 <div class="review-header">
-                    <div class="reviewer-avatar"><span>PP</span></div>
+                    <div class="reviewer-avatar"><span>SK</span></div>
                     <div class="reviewer-info">
-                        <h4>Priya Patil</h4>
+                        <h4>Sachin Kulkarni</h4>
                         <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                                 class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <span class="review-source"><i class="fab fa-google"></i> Google Review</span>
                     </div>
                 </div>
-                <p class="review-text">"Love the customization options. I can order less spicy food for my kids!"
-                </p>
+                <p class="review-text">"Best vegetarian restaurant in Kurduwadi! Quality food with hygienic preparation.
+                    AC dining is comfortable. Highly recommended!"</p>
             </div>
             <div class="review-card">
                 <div class="review-header">
-                    <div class="reviewer-avatar"><span>SM</span></div>
+                    <div class="reviewer-avatar"><span>PM</span></div>
                     <div class="reviewer-info">
-                        <h4>Suresh Mane</h4>
+                        <h4>Priya Mahajan</h4>
                         <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                                 class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <span class="review-source"><i class="fab fa-google"></i> Google Review</span>
                     </div>
                 </div>
-                <p class="review-text">"Trusted restaurant with great taste. Been ordering for years!"</p>
+                <p class="review-text">"Party hall for my daughter's birthday was amazing! Staff was very helpful and
+                    food was delicious. Everyone loved it!"</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-avatar"><span>RJ</span></div>
+                    <div class="reviewer-info">
+                        <h4>Rahul Jadhav</h4>
+                        <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <span class="review-source"><i class="fab fa-google"></i> Google Review</span>
+                    </div>
+                </div>
+                <p class="review-text">"Home delivery was superfast! Food arrived hot within 30 minutes. Chapati was
+                    fresh and sabzi was tasty. Will order again!"</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-avatar"><span>VD</span></div>
+                    <div class="reviewer-info">
+                        <h4>Vijay Deshmukh</h4>
+                        <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <span class="review-source"><i class="fab fa-google"></i> Google Review</span>
+                    </div>
+                </div>
+                <p class="review-text">"मी 7 वर्षांपासून इथे येतोय. जेवणाची quality सतत उत्तम राहिली आहे. स्वच्छता आणि
+                    चव दोन्ही परफेक्ट!"</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-avatar"><span>SG</span></div>
+                    <div class="reviewer-info">
+                        <h4>Sneha Gaikwad</h4>
+                        <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <span class="review-source"><i class="fab fa-google"></i> Google Review</span>
+                    </div>
+                </div>
+                <p class="review-text">"Tried their Thali - amazing value for money! Dal, sabzi, chapati, rice -
+                    everything was delicious. Pure veg heaven!"</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-avatar"><span>NK</span></div>
+                    <div class="reviewer-info">
+                        <h4>Nilesh Kale</h4>
+                        <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <span class="review-source"><i class="fab fa-google"></i> Google Review</span>
+                    </div>
+                </div>
+                <p class="review-text">"Ordered via WhatsApp for a family function. 50 people - all were satisfied!
+                    Catering service is excellent. Thank you Hotel Pranjal!"</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-avatar"><span>AS</span></div>
+                    <div class="reviewer-info">
+                        <h4>Arti Shinde</h4>
+                        <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <span class="review-source"><i class="fab fa-google"></i> Google Review</span>
+                    </div>
+                </div>
+                <p class="review-text">"FSSAI certified and 100% hygienic. You can taste the freshness in every bite. My
+                    go-to restaurant for family dinners!"</p>
             </div>
         </div>
         </div>
@@ -978,7 +1049,11 @@
                 <a href="https://www.google.com/maps/search/Hotel+Pranjal+Kurduwadi" target="_blank"><i
                         class="fab fa-google"></i></a>
             </div>
-            <p class="copyright">© 2024 Hotel Pranjal | Developed by <span class="developer-name">Shivam</span></p>
+            <p class="copyright">© 2024 Hotel Pranjal. All Rights Reserved.</p>
+            <!-- Developer Credit - Vertical at bottom right -->
+            <div class="developer-credit">
+                Developed by Shivam C. Kole
+            </div>
         </div>
     </footer>
 
@@ -1139,6 +1214,8 @@
             </div>
         </div>
     </div>
+
+
 
     <!-- WhatsApp Float -->
     <a href="https://wa.me/917517972020" class="whatsapp-float" target="_blank">
